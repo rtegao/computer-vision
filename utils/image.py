@@ -2,6 +2,7 @@ from logging import raiseExceptions
 import skimage.io as io
 import matplotlib.pyplot as plt
 import numpy
+
 class Image:
     def __init__(self):
         pass
@@ -35,10 +36,19 @@ class ImageReader(Image):
 class ImageTranformer(Image):
     def __init__(self, image:numpy.ndarray):
         self.image = image
+        # self.default_matrix = numpy.full(self.image.shape, 255)
     
     def negative_tranformation(self):
-        w,h = self.image.shape
-        for i in range(w):
-            for j in range(h):
-                self.image[i,j] = 255 - self.image[i,j]
-        return self.image
+
+        return( 
+            numpy.subtract(numpy.full(self.image.shape, 255), self.image)
+        )
+
+    def log_transformation(self, c:int):
+        if c>=1:
+            return(
+                c * (numpy.log(self.image + 1))
+            )
+        else:
+            ValueError("c value mast be greater than 1")
+
