@@ -2,7 +2,7 @@ from logging import raiseExceptions
 import skimage.io as io
 import matplotlib.pyplot as plt
 import numpy
-
+from typing import Tuple
 class Image:
     def __init__(self):
         pass
@@ -54,6 +54,11 @@ class ImageTranformer(Image):
 
     def powerlaw_transformation(self, c:float, alpha:float):
         return(
-            c*(numpy.power(self.image, numpy.full(self.image.shape, alpha)))
+            c * (numpy.power(self.image, numpy.full(self.image.shape, alpha)))
+        )
+
+    def linear_transformation(self, gray_range=Tuple[float,float], out_gray_level = float):
+        return(
+            numpy.where((self.image >= gray_range[0]) & (self.image <= gray_range[1]), self.image, out_gray_level*self.image)
         )
 
