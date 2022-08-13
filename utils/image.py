@@ -44,11 +44,16 @@ class ImageTranformer(Image):
             numpy.subtract(numpy.full(self.image.shape, 255), self.image)
         )
 
-    def log_transformation(self, c:int):
+    def log_transformation(self, c:float):
         if c>=1:
             return(
                 c * (numpy.log(self.image + 1))
             )
         else:
             ValueError("c value mast be greater than 1")
+
+    def powerlaw_transformation(self, c:float, alpha:float):
+        return(
+            c*(numpy.power(self.image, numpy.full(self.image.shape, alpha)))
+        )
 
