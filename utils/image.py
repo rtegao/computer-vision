@@ -36,7 +36,7 @@ class ImageTranformer(Image):
     def __init__(self, image:numpy.ndarray):
         self.image = image
     
-    def negative(self):
+    def negative_tranformation(self):
         w,h = self.image.shape
         for i in range(w):
             for j in range(h):
